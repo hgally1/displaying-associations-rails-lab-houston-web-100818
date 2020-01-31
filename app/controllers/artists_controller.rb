@@ -1,8 +1,21 @@
 class ArtistsController < ApplicationController
+
+  before_action :define_current_song
+
+  def define_current_song
+    if params[:id]
+      @artist = Artist.find(params[:id])
+    else
+      @artist = Artist.new
+    end
+  end
+
   def index
+    @artists = Artist.all
   end
 
   def show
+    @artist = Artist.find(params[:id])
   end
 
   def new
